@@ -2,8 +2,6 @@ package com.chuwa.bank.entity;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(
       name = "accounts"
@@ -20,10 +18,49 @@ public class Account {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL) // The mappedBy attribute specifies the name of the field in the Transaction entity that owns the relationship
-    private List<Transaction> transaction;
+    @Column(columnDefinition = "numeric default 0")
+    private Double balance = 0.0;
 
-    @Column(columnDefinition = "numeric default 500")
-    private Double balance;
+    public Account() {
 
+    }
+
+    public Account(Long id, String name, String address, Double balance) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
 }

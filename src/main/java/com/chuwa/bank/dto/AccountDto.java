@@ -10,6 +10,10 @@ public class AccountDto {
 
     private Double balance;
 
+    public AccountDto() {
+
+    }
+
     public AccountDto(String name, String address, Double balance) {
         this.name = name;
         this.address = address;

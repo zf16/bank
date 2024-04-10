@@ -12,7 +12,7 @@ public interface AccountService {
 
     AccountDto getAccountById(long accountId);
 
-    AccountDto updateAccount(AccountDto accountDto);
+    AccountDto updateAccount(long accountId, AccountDto accountDto);
 
     void deleteAccount(long accountId);
 

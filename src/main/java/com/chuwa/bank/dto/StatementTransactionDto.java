@@ -1,16 +1,12 @@
 package com.chuwa.bank.dto;
 
-import com.chuwa.bank.entity.Account;
+import lombok.Builder;
 
-import java.time.LocalDate;
-
-public class TransactionDto {
+public class StatementTransactionDto {
 
     private long id;
 
-    private Account account;
-
-    private LocalDate transactionDate;
+    private String transactionDate;
 
     private String description;
 
@@ -20,13 +16,12 @@ public class TransactionDto {
 
     private double balance;
 
-    public TransactionDto() {
+    public StatementTransactionDto() {
 
     }
 
-    public TransactionDto(long id, Account account, LocalDate transactionDate, String description, long reference, double amount, double balance) {
+    public StatementTransactionDto(long id, String transactionDate, String description, long reference, double amount, double balance) {
         this.id = id;
-        this.account = account;
         this.transactionDate = transactionDate;
         this.description = description;
         this.reference = reference;
@@ -42,19 +37,11 @@ public class TransactionDto {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public LocalDate getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(LocalDate transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 
