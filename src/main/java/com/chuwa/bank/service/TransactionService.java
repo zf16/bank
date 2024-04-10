@@ -16,4 +16,5 @@ public interface TransactionService {
     List<TransactionDto> getAllTransactionsBetween(long accountId, LocalDate startDate, LocalDate endDate);
 
     void deleteTransaction(long transactionId);
+
 }

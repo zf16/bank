@@ -45,9 +45,10 @@ public class TransactionController {
         return new ResponseEntity<>(transactionService.getTransactionById(transactionId), HttpStatus.OK);
     }
 
+    @Deprecated
     @DeleteMapping("{transactionId}")
     public ResponseEntity<String> deleteTransaction(@PathVariable(name = "transactionId") long transactionId) {
-
+        transactionService.deleteTransaction(transactionId);
         return new ResponseEntity<>("Transaction deleted successfully", HttpStatus.OK);
     }
 }

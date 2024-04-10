@@ -44,29 +44,28 @@ public class StatementServiceImpl implements StatementService {
               .map(this::mapToStatementTransactionDto)
               .toList();
 
-        StatementDto statementDto = new StatementDto();
-        statementDto.setName(accountDto.getName());
-        statementDto.setAccountNo(String.valueOf(accountDto.getId()));
-        statementDto.setAddress(accountDto.getAddress());
-        statementDto.setTransactions(statementTransactions);
-        statementDto.setStartDate(startDate);
-        statementDto.setEndDate(endDate);
-        statementDto.setTotalWithdrawal(totalWithdrawal);
-        statementDto.setTotalDeposit(totalDeposit);
-
-        return statementDto;
+        return StatementDto.builder()
+              .name(accountDto.getName())
+              .accountNo(String.valueOf(accountDto.getId()))
+              .address(accountDto.getAddress())
+              .transactions(statementTransactions)
+              .startDate(startDate)
+              .endDate(endDate)
+              .totalWithdrawal(totalWithdrawal)
+              .totalDeposit(totalDeposit)
+              .build();
     }
 
     private StatementTransactionDto mapToStatementTransactionDto(TransactionDto transactionDto) {
 
-        StatementTransactionDto statementTransactionDto = new StatementTransactionDto();
-        statementTransactionDto.setId(transactionDto.getId());
-        statementTransactionDto.setTransactionDate(transactionDto.getTransactionDate().toString());
-        statementTransactionDto.setDescription(transactionDto.getDescription());
-        statementTransactionDto.setReference(transactionDto.getReference());
-        statementTransactionDto.setAmount(transactionDto.getAmount());
-        statementTransactionDto.setBalance(transactionDto.getBalance());
+        return StatementTransactionDto.builder()
+              .id(transactionDto.getId())
+              .transactionDate(transactionDto.getTransactionDate().toString())
+              .description(transactionDto.getDescription())
+              .reference(transactionDto.getReference())
+              .amount(transactionDto.getAmount())
+              .balance(transactionDto.getBalance())
+              .build();
 
-        return statementTransactionDto;
     }
 }
