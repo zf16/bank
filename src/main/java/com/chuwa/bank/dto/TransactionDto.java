@@ -1,6 +1,8 @@
 package com.chuwa.bank.dto;
 
 import com.chuwa.bank.entity.Account;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
@@ -12,6 +14,8 @@ public class TransactionDto {
 
     private LocalDate transactionDate;
 
+    @NotEmpty
+    @Size(min = 2, message = "Description must be at least 2 characters.")
     private String description;
 
     private long reference;

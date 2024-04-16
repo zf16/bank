@@ -7,6 +7,7 @@ import com.chuwa.bank.entity.Account;
 import com.chuwa.bank.entity.Transaction;
 import com.chuwa.bank.exception.ResourceNotFoundException;
 import com.chuwa.bank.service.TransactionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
@@ -38,12 +40,16 @@ public class TransactionServiceImpl implements TransactionService {
         // save account entity to DB
         accountRepository.save(account);
 
+        log.info("Account with id {} balance is updated in DB.", account.getId());
+
         Transaction transaction = mapToEntity(transactionDto);
         transaction.setAccount(account);
         transaction.setBalance(account.getBalance());
 
         // save transaction entity to DB
         Transaction savedTransaction = transactionRepository.save(transaction);
+
+        log.info("Transaction with id {} is committed.", savedTransaction.getId());
 
         return mapToDto(savedTransaction);
     }

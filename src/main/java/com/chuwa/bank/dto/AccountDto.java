@@ -1,11 +1,15 @@
 package com.chuwa.bank.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class AccountDto {
 
     private Long id;
 
+    @NotEmpty(message = "Account name must not be empty")
     private String name;
 
+    @NotEmpty(message = "Account address must not be empty")
     private String address;
 
     private Double balance;

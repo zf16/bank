@@ -2,6 +2,7 @@ package com.chuwa.bank.controller;
 
 import com.chuwa.bank.dto.AccountDto;
 import com.chuwa.bank.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class AccountController {
     }
 
     @PostMapping("")
-    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
+    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
 
@@ -35,7 +36,7 @@ public class AccountController {
 
     @PutMapping("{id}")
     public ResponseEntity<AccountDto> updateAccount(@PathVariable(name = "id") long id,
-                                                    @RequestBody AccountDto accountDto) {
+                                                    @Valid @RequestBody AccountDto accountDto) {
         return new ResponseEntity<>(accountService.updateAccount(id, accountDto), HttpStatus.OK);
     }
 

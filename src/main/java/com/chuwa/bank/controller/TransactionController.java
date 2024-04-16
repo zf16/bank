@@ -2,6 +2,7 @@ package com.chuwa.bank.controller;
 
 import com.chuwa.bank.dto.TransactionDto;
 import com.chuwa.bank.service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class TransactionController {
 
     @PostMapping("{accountId}")
     public ResponseEntity<TransactionDto> createTransaction(@PathVariable(name = "accountId") long accountId,
-                                                            @RequestBody TransactionDto transactionDto) {
+                                                            @Valid @RequestBody TransactionDto transactionDto) {
 
         return new ResponseEntity<>(transactionService.createTransaction(accountId, transactionDto), HttpStatus.CREATED);
     }
