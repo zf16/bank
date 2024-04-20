@@ -22,14 +22,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDetails<String>> handleResourceNotFoundException(ResourceNotFoundException exception,
                                                                   WebRequest webRequest) {
 
-        log.error("Resource is not found. {}", exception.getMessage());
-
         ErrorDetails<String> errorDetails = ErrorDetails.<String>builder()
               .timestamp(new Date())
               .message(exception.getMessage())
               .details(webRequest.getDescription(false))
               .build();
 
+        log.error("Errors: {}", errorDetails);
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
