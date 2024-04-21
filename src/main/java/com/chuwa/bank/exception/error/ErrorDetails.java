@@ -1,5 +1,6 @@
 package com.chuwa.bank.exception.error;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.Date;
@@ -11,11 +12,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class ErrorDetails <T> {
 
+    @JsonProperty("timestamp")
     private Date timestamp;
 
-    private T message;
+    @JsonProperty("URL")
+    private String URL;
 
-    private String details;
+    @JsonProperty("message")
+    private String message;
 
+    @JsonProperty("details")
+    private T details;
 
 }

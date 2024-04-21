@@ -1,6 +1,7 @@
 package com.chuwa.bank.exception;
 
 import com.chuwa.bank.exception.error.ErrorDetails;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,8 @@ public class GlobalExceptionHandler {
 
         ErrorDetails<String> errorDetails = ErrorDetails.<String>builder()
               .timestamp(new Date())
+              .URL(webRequest.getDescription(false))
               .message(exception.getMessage())
-              .details(webRequest.getDescription(false))
               .build();
 
         log.error("Errors: {}", errorDetails);
@@ -45,8 +46,9 @@ public class GlobalExceptionHandler {
 
         ErrorDetails<Map<String, String>> errorDetails = ErrorDetails.<Map<String, String>>builder()
               .timestamp(new Date())
-              .message(fieldErrors)
-              .details(webRequest.getDescription(false))
+              .URL(webRequest.getDescription(false))
+              .message(exception.getMessage())
+              .details(fieldErrors)
               .build();
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
@@ -56,11 +58,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDetails<String>> handleGlobalException(Exception exception,
                                                                         WebRequest webRequest) {
 
-
         ErrorDetails<String> errorDetails = ErrorDetails.<String>builder()
               .timestamp(new Date())
+              .URL(webRequest.getDescription(false))
               .message(exception.getMessage())
-              .details(webRequest.getDescription(false))
               .build();
 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
