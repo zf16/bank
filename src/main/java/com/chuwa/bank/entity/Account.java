@@ -1,11 +1,13 @@
 package com.chuwa.bank.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 @Entity
 @Table(
       name = "accounts"
 )
+@Builder
 public class Account {
 
     @Id

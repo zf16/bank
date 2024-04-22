@@ -3,9 +3,11 @@ package com.chuwa.bank.dto;
 import com.chuwa.bank.entity.Account;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
 import java.time.LocalDate;
 
+@Builder
 public class TransactionDto {
 
     private long id;

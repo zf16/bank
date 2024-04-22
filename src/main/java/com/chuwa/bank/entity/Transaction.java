@@ -1,6 +1,7 @@
 package com.chuwa.bank.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(
       name = "transactions"
 )
+//@Builder
 public class Transaction {
 
     @Id
@@ -53,6 +55,10 @@ public class Transaction {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getCreatedTimestamp() {

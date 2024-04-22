@@ -39,9 +39,9 @@ public class TransactionServiceImpl implements TransactionService {
 
         // save account entity to DB
         accountRepository.save(account);
+        log.info("Account id {} has updated its balance in DB.", account.getId());
 
-        log.info("Account with id {} balance is updated in DB.", account.getId());
-
+        // create transaction entity
         Transaction transaction = mapToEntity(transactionDto);
         transaction.setAccount(account);
         transaction.setBalance(account.getBalance());
