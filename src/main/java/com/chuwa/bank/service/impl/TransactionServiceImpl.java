@@ -91,6 +91,7 @@ public class TransactionServiceImpl implements TransactionService {
         return mapToDto(transaction);
     }
 
+    @Deprecated
     @Override
     public void deleteTransaction(long transactionId) {
 

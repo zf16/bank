@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(
       name = "transactions"
 )
-//@Builder
+@Builder
 public class Transaction {
 
     @Id
@@ -44,13 +44,15 @@ public class Transaction {
 
     }
 
-    public Transaction(Account account, String description, long reference, Double amount, Double balance, LocalDate transactionDate) {
+    public Transaction(Long id, Account account, String description, long reference, Double amount, Double balance, LocalDate transactionDate, LocalDateTime createdTimestamp) {
+        this.id = id;
         this.account = account;
         this.description = description;
         this.reference = reference;
         this.amount = amount;
         this.balance = balance;
         this.transactionDate = transactionDate;
+        this.createdTimestamp = createdTimestamp;
     }
 
     public Long getId() {

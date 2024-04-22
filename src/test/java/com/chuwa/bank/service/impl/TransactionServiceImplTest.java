@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,10 +94,94 @@ class TransactionServiceImplTest {
 
     @Test
     void getAllTransactions() {
+        // GIVEN
+        long accountId = 9999;
+
+        Account account = Account.builder()
+              .id(accountId)
+              .name("accountName")
+              .balance(100.0)
+              .address("accountAddress")
+              .build();
+
+        Transaction transaction1 = Transaction.builder()
+              .id(1L)
+              .account(account)
+              .amount(100.0)
+              .reference(1)
+              .description("description")
+              .transactionDate(LocalDate.now())
+              .balance(100.0)
+              .build();
+
+        Transaction transaction2 = Transaction.builder()
+              .id(2L)
+              .account(account)
+              .amount(100.0)
+              .reference(2)
+              .description("description")
+              .transactionDate(LocalDate.now())
+              .balance(100.0)
+              .build();
+
+
+        when(accountRepositoryMock.findById(anyLong())).thenReturn(Optional.of(account));
+        when(transactionRepositoryMock.findAll()).thenReturn(List.of(transaction1, transaction2));
+
+        // WHEN
+        List<TransactionDto> result = sut.getAllTransactions(accountId);
+
+        // THEN
+        assertEquals(2, result.size());
     }
 
     @Test
     void getAllTransactionsBetween() {
+//        // GIVEN
+//        long accountId = 9999;
+//
+//        Account account = Account.builder()
+//              .id(accountId)
+//              .name("accountName")
+//              .balance(100.0)
+//              .address("accountAddress")
+//              .build();
+//
+//        LocalDate startDate = LocalDate.of(2024, 4, 1);
+//        LocalDate endDate = LocalDate.of(2024, 4, 30);
+//
+//
+//        Transaction transaction1 = Transaction.builder()
+//              .id(1L)
+//              .account(account)
+//              .amount(100.0)
+//              .reference(1)
+//              .description("description")
+//              .transactionDate(LocalDate.of(2024, 4, 21))
+//              .balance(100.0)
+//              .build();
+//
+//        Transaction transaction2 = Transaction.builder()
+//              .id(2L)
+//              .account(account)
+//              .amount(100.0)
+//              .reference(2)
+//              .description("description")
+//              .transactionDate(LocalDate.of(2024, 3, 21))
+//              .balance(100.0)
+//              .build();
+//
+//
+//        when(accountRepositoryMock.findById(anyLong())).thenReturn(Optional.of(account));
+//        when(transactionRepositoryMock.findTransactionByTransactionDateBetween(startDate, endDate)).thenReturn(List.of(transaction1, transaction2));
+//
+//        // WHEN
+//        List<TransactionDto> result = sut.getAllTransactionsBetween(accountId, startDate, endDate);
+//
+//        // THEN
+//        assertEquals(1, result.size());
+//        result.forEach(t -> assertTrue(t.getTransactionDate().isAfter(startDate) &&
+//              t.getTransactionDate().isBefore(endDate)));
     }
 
     @Test
