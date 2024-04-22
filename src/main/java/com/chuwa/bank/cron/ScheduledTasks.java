@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
-@Component
+//@Component
 public class ScheduledTasks {
 
     private final AccountService accountService;
